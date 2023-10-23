@@ -1,0 +1,32 @@
+TY  - JOUR
+DB  - PubMed
+AU  - Schmidt, Bertil
+AU  - Hildebrandt, Andreas
+T1  - Deep learning in next-generation sequencing
+LA  - eng
+SN  - 1878-5832
+SN  - 1359-6446
+Y1  - 2021/01/
+ET  - 2020/10/12
+AB  - Next-generation sequencing (NGS) methods lie at the heart of large parts of biological and medical research. Their fundamental importance has created a continuously increasing demand for processing and analysis methods of the data sets produced, addressing questions such as variant calling, metagenomic classification and quantification, genomic feature detection, or downstream analysis in larger biological or medical contexts. In addition to classical algorithmic approaches, machine-learning (ML) techniques are often used for such tasks. In particular, deep learning (DL) methods that use multilayered artificial neural networks (ANNs) for supervised, semisupervised, and unsupervised learning have gained significant traction for such applications. Here, we highlight important network architectures, application areas, and DL frameworks in a NGS context.
+SP  - 173
+EP  - 180
+VL  - 26
+IS  - 1
+AN  - 33059075
+UR  - https://pubmed.ncbi.nlm.nih.gov/33059075
+DO  - 10.1016/j.drudis.2020.10.002
+L2  - https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7550123/
+U1  - 33059075[pmid]
+U2  - PMC7550123[pmcid]
+U4  - S1359-6446(20)30415-3[PII]
+J2  - Drug Discov Today
+JF  - Drug discovery today
+KW  - Biomedical Research/trends
+KW  - *Deep Learning
+KW  - High-Throughput Nucleotide Sequencing/*methods
+KW  - Humans
+KW  - *Metagenomics/methods/trends
+KW  - *Neural Networks, Computer
+CY  - England
+ER  - 

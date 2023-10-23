@@ -1,0 +1,14 @@
+*.*
+!*.sh
+!*.R
+!*.Rmd
+!*.md
+!*.png
+!*.py
+!*.jpg
+!*.pl
+!*.tif
+!.gitignore
+!*.html
+!*.ris
+!APOE_refseq_transcript.fasta

@@ -1,0 +1,65 @@
+---
+title: "methodsResults"
+author: "nithyasarabudla"
+date: "19/02/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Title : Differential Expression Analysis
+
+# Methods
+The two main steps in performing differential expression analysis are to estimate the relative abundance of transcripts, and to apply statistical models to test for differential expression between treatment groups.
+
+Estimating relative abundance is basically determining how many NGS reads match a given gene within a genome. 
+In this module,Salmon (Patro et al. 2017) is used to estimate relative abundance, tximport (Soneson, Love, and Robinson 2016) to import the Salmon abundance estimates, and DESeq2 (Love, Huber, and Anders 2014) to perform statistical tests to identify differentially expressed genes.
+
+# buildIndex.sh
+ builds a Salmon index from the de-novo transcriptome. The resulting index is named AipIndex and uses a k-mer length of 25.
+ 
+# alignAll.sh
+performs Salmon abundance estimation for all the Aip samples and aligns them to AipIndex using Salmon. looped through each sample and generates an output directory “quant”
+	
+# mergeKo.R
+1.Three annotation files—transcriptBlast.txt, kegg.txt, and ko.txt—are loaded and processed by the mergeKo.R script. 
+2.It combines the data from these files to produce the tx2gene table, which maps transcripts to genes. 
+3.The BLAST hits for each transcript are listed in the transcriptBlast.txt file. The kegg.txt file provides a mapping from SwissProt IDs to KEGG IDs. 
+4.The ko.txt file provides a mapping from KEGG IDs to KO IDs.
+ The BLAST hits are filtered by the script to only include those that cover at least 50% of the target sequence, and this information is combined with the SwissProt-to-KEGG mapping and the KEGG-to-KO mapping to produce the final tx2gene table. 
+5.The final output is a csv file called tx2gene.csv that contains the transcript to KO mappings.
+
+# de.R
+1.The R packages "tximport,"  “readr," "DESeq2”, "dplyr,"  "tibble," and "knitr” were loaded into the R script.
+defining the constants RESULTS_DIR and AIPTASIA_DIR to correspond to the corresponding directories, and setting the TESTING variable to FALSE to use the entire Samples set.
+2.Defined alternative samples are tabled for testing purposes.
+3.A tx2gene file was read into the script using read.csv().
+4.If TESTING was set to TRUE, an alternative samples table was created to run the analysis on a smaller subset of data. Otherwise, the original samples table was read into the script using read.csv().
+5."tx2gene.csv," which was created by the "MergeKo.R" script, is read, and the file's head is printed. If TESTING is TRUE, then samples are defined as testing the samples that were created above. If TESTING is FALSE, then samples are defined as input from the Samples.csv file. 
+6.The quant.sf files for each sample were imported into R using tximport(), specifying type="salmon" and tx2gene=tx2gene.
+7.A DESeqDataSet was created from the imported files, specifying the design formula as Menthol + Vibrio.
+8.Following the ref="Control" relevel operation, the table's Vibrio and Menthol columns are rewritten. DESeq analysis is run on the generated table, and the results are filtered to only show rows with sums greater than or equal to 10.
+9.The DESeq() function was used to perform differential expression analysis.
+10.With the exception of Intercept, all DE results from the results() function were flattened into a single file.
+11.The file was filtered for an adjusted p-value less than 0.05.
+12.he gene IDs were annotated with their corresponding pathways and descriptions by merging the de file with the loc and loc_name files, using the merge() function.
+13.The resulting file, deAnnotated.csv, was saved using write.csv().
+
+# Results
+
+"ko","pathway","description","log2FoldChange","padj","Factor"
+"ko:K17920","path:ko04144","Endocytosis",0.875482467711954,0.00352686364198601,"Menthol_Menthol_vs_Control"
+
+# References
+
+1.Love, Michael I., Wolfgang Huber, and Simon Anders. 2014. “Moderated Estimation of Fold Change and Dispersion for RNA-Seq Data with DESeq2.” *Genome Biol* 15 (12): 550–50.
+
+2.Patro, Rob, Geet Duggal, Michael I. Love, Rafael A. Irizarry, and Carl Kingsford. 2017. “Salmon Provides Fast and Bias-Aware Quantification of Transcript Expression.” *Nat Methods* 14 (4): 417–19.
+
+3.Soneson, Charlotte, Michael I. Love, and Mark D. Robinson. 2016. “Differential Analyses for RNA-Seq: Transcript-Level Estimates Improve Gene-Level Inferences.” *F1000Res* 4 (February): 1521–1.
+
+
+
+
