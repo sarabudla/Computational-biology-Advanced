@@ -1,6 +1,6 @@
 ## Bioinformatics and Genomics Skills
 
-I have successfully completed the following bioinformatics and genomics tasks:
+This repository contains the following bioinformatics and genomics tasks:
 
 - Python Scripting with BioPython
 - Automated Dataset Downloads from NCBI and EMBL
